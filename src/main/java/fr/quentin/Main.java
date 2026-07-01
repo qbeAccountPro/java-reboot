@@ -8,8 +8,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scannerUserInfo = new Scanner(System.in);
+
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
+        System.out.println("=========================\n" +
+                " JAVA REBOOT\n" +
+                "=========================");
         System.out.println("Hello and welcome!");
         System.out.println("What is your name :");
         String userName = scannerUserInfo.nextLine();
@@ -19,7 +23,7 @@ public class Main {
         int userAge = scannerUserInfo.nextInt();
         int actualYear = Year.now().getValue();
         int yearOfBirth = actualYear - userAge;
-        System.out.println("Welcome \""+userName +" "+userSurname+"\"");
-        System.out.println("You was born in : \""+yearOfBirth+"\"");
+        System.out.println("Welcome " + userName + " " + userSurname + "!");
+        System.out.println("You were born around : \""+yearOfBirth+"\"");
         }
 }
