@@ -3,10 +3,13 @@ package fr.quentin;
 import fr.quentin.model.Recipe;
 import fr.quentin.controller.menuController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static String main(String[] args) {
+    public static void main(String[] args) {
+        List<Recipe> recipes = new ArrayList<>();
         System.out.println("""
                 =========================
                       JAVA REBOOT
@@ -18,53 +21,33 @@ public class Main {
                 4 - Delete recipe
                 5 - Exit
                 """);
-        try {
-            Scanner scannerUserInfo = new Scanner(System.in);
-            switch (scannerUserInfo.nextInt()) {
-                case 1:
-                    menuController.addRecipe();
-                    break;
-                case 2:
-                    menuController.displayRecipe();
-                    break;
-                case 3:
-                    menuController.searchRecipe();
-                    break;
-                case 4:
-                    menuController.deleteRecipe();
-                    break;
-                case 5:
-                    menuController.exitApp();
-                    break;
-                default:
-                    System.out.println("Choice incorrect");
-                    break;
-            }
 
-            String pizzaName = scannerUserInfo.nextLine();
-            double pizzaPrice = scannerUserInfo.nextDouble();
-            int pizzaCalories = scannerUserInfo.nextInt();
-            Recipe pizza = new Recipe(pizzaName, pizzaPrice, pizzaCalories);
-            System.out.println(pizza);
+        Scanner scannerUserInfo = new Scanner(System.in);
+        String choice = "";
+        do {
+             choice = scannerUserInfo.nextLine();
+                switch (choice) {
+                    case "1":
+                        recipes = menuController.addRecipe(recipes, scannerUserInfo);
+                        break;
+                    case "2":
+                        menuController.displayRecipe(recipes);
+                        break;
+                    case "3":
+                        menuController.searchRecipe(recipes);
+                        break;
+                    case "4":
+                        recipes = menuController.deleteRecipe(recipes);
+                        break;
+                    default:
+                        System.out.println("Choice incorrect");
+                        break;
+                }
+            System.out.println("fin 1");
 
-            // Interactive app to get Name Surename and Year //
-         /*
-            System.out.println("Hello and welcome!");
-            System.out.println("What is your name :");
-            String userName = scannerUserInfo.nextLine();
-            System.out.println("What is your surname :");
-            String userSurname = scannerUserInfo.nextLine();
-            System.out.println("How old are you :");
-            int userAge = scannerUserInfo.nextInt();
-            int actualYear = Year.now().getValue();
-            int yearOfBirth = actualYear - userAge;
-            System.out.println("Welcome " + userName + " " + userSurname + "!");
-            System.out.println("You were born around : \"" + yearOfBirth + "\"");*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } while (!"5".equals(choice));
+        System.out.println("test 1");
 
-
-        return null;
+        menuController.exitApp();
     }
 }
