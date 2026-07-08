@@ -1,31 +1,53 @@
 package fr.quentin;
 
 import fr.quentin.model.Recipe;
+import fr.quentin.controller.menuController;
 
-import java.time.Year;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("=========================\n" +
-                " JAVA REBOOT\n" +
-                "=========================");
+    public static String main(String[] args) {
+        System.out.println("""
+                =========================
+                      JAVA REBOOT
+                =========================
+                
+                1 - Add recipe
+                2 - Display recipes
+                3 - Search recipe
+                4 - Delete recipe
+                5 - Exit
+                """);
         try {
             Scanner scannerUserInfo = new Scanner(System.in);
-            System.out.println("Hello and welcome!");
-            System.out.println("What is the name of your new pizza :");
-            String pizzaName = scannerUserInfo.nextLine();
-            System.out.println("What is the price of " + pizzaName);
-            Double pizzaPrice = scannerUserInfo.nextDouble();
-            System.out.println("What is the amout of calories inside the " + pizzaName);
-            int pizzaCalories = scannerUserInfo.nextInt();
-            Recipe pizza = new Recipe(pizzaPrice, pizzaCalories, pizzaName);
-            System.out.println("To recap, here is the pizza :");
-            System.out.println(pizza.displayRecipe());
+            switch (scannerUserInfo.nextInt()) {
+                case 1:
+                    menuController.addRecipe();
+                    break;
+                case 2:
+                    menuController.displayRecipe();
+                    break;
+                case 3:
+                    menuController.searchRecipe();
+                    break;
+                case 4:
+                    menuController.deleteRecipe();
+                    break;
+                case 5:
+                    menuController.exitApp();
+                    break;
+                default:
+                    System.out.println("Choice incorrect");
+                    break;
+            }
 
-            // Interactive app for Name Surename and Year //
+            String pizzaName = scannerUserInfo.nextLine();
+            double pizzaPrice = scannerUserInfo.nextDouble();
+            int pizzaCalories = scannerUserInfo.nextInt();
+            Recipe pizza = new Recipe(pizzaName, pizzaPrice, pizzaCalories);
+            System.out.println(pizza);
+
+            // Interactive app to get Name Surename and Year //
          /*
             System.out.println("Hello and welcome!");
             System.out.println("What is your name :");
@@ -39,9 +61,10 @@ public class Main {
             System.out.println("Welcome " + userName + " " + userSurname + "!");
             System.out.println("You were born around : \"" + yearOfBirth + "\"");*/
         } catch (Exception e) {
-            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
 
 
+        return null;
     }
 }

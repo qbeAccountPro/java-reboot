@@ -6,7 +6,7 @@ public class Recipe {
     private double price;
     private int calories;
 
-    public Recipe(double price, int calories, String name) {
+    public Recipe(String name, double price, int calories ) {
         this.price = price;
         this.calories = calories;
         this.name = name;
@@ -38,19 +38,15 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Recipe{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", calories=" + calories +
-                '}';
-    }
+        return """
+           ========= RECIPE =========
 
-    public String displayRecipe(){
-        return ("========== RECIPE ==========\n\n" +
-                "Name : " + name + "\n" +
-                "Price : " + price + " €\n" +
-                "Calories : " + calories + " Kcal\n" +
-                "\n" +
-                "============================");
+           Name : %s
+           Price : %.2f €
+           Calories : %d kcal
+
+           ==========================
+           """
+                .formatted(name, price, calories);
     }
 }
